@@ -1,0 +1,21 @@
+function binarySearch(target, min, max) {
+  while (max >= min) {
+    let guess = Math.floor((min + max) / 2);
+    if (primes[guess] == target) {
+      return guess;
+    } else if (primes[guess] < target) {
+      min = guess + 1;
+    } else if (primes[guess] > target) {
+      max = guess - 1;
+    }
+  }
+  return -1;
+}
+
+//1. min과 max 크기 설정
+//2. max가 min보가 크거나 같을 동안
+//3. guess는 (min + max)/2의 정수부
+//4. arr[guess]가 target과 같으면 return guess
+//5. arr[guess]가 target 보다 크면 min = guess +1
+//6. arr[guess]가 target 보다 작으면 max = guess -1;
+//7. 2번으로 돌아가 반복!
