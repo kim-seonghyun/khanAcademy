@@ -1,0 +1,41 @@
+커스텀!
+
+//다익스트라 알고리즘
+
+let c = [
+  [Infinity, 10, Infinity, 30, 100],
+  [Infinity, Infinity, 50, Infinity, Infinity],
+  [Infinity, Infinity, Infinity, Infinity, 10],
+  [Infinity, Infinity, 20, Infinity, 60],
+  [Infinity, Infinity, Infinity, Infinity, Infinity],
+];
+
+let d = [];
+// d 초기화
+c[0].forEach((el) => {
+  d.push(el);
+});
+
+let s = new Set([1, 2, 3, 4]);
+
+for (let i = 0; i < 5; i++) {
+  let minValue = Infinity;
+  let minIndex = 0;
+  //최소 경로 탐색
+  s.forEach((el) => {
+    if (minValue > d[el]) {
+      minValue = d[el];
+      minIndex = el;
+    }
+  });
+  console.log(minIndex); // 고른 인덱스
+  s.delete(minIndex); //집합 s에서 제거
+  console.log(d);
+  
+  //최소 정점과 연결된 정점의 최솟값 구하기
+  c[minIndex].forEach((el, index) => {
+    if (el !== Infinity) {
+      d[index] = Math.min(d[index], d[minIndex] + el);
+    }
+  });
+}
