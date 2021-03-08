@@ -1,0 +1,51 @@
+let arr = [14, 7, 12, 3, 9, 11, 6, 2];
+
+//분할,정복
+function mergeSort(arr, left, right) {
+  let mid = Math.floor((left + right) / 2);
+  if (left < right) {
+    mergeSort(arr, left, mid);
+    mergeSort(arr, mid + 1, right);
+    merge(arr, left, mid, right);
+  }
+  return arr;
+}
+
+//merge
+function merge(tmpArr, left, mid, right) {
+  let lowArray = [];
+  let highArray = [];
+
+  let k = left;
+  let i, j;
+
+  for (i = 0; k <= mid; i++, k++) {
+    lowArray[i] = tmpArr[k];
+  }
+
+  for (j = 0; k <= right; k++, j++) {
+    highArray[j] = tmpArr[k];
+  }
+
+  //나눠서 복사 완료
+
+  (i = 0), (j = 0), (k = left);
+  while (i < lowArray.length && j < highArray.length) {
+    if (lowArray[i] < highArray[j]) {
+      tmpArr[k++] = lowArray[i++];
+    } else {
+      tmpArr[k++] = highArray[j++];
+    }
+  }
+  //highArr 또는 lowArray 전송완료, 나머지 배열은 그냥 붙여넣기
+
+  while (i < lowArray.length) {
+    tmpArr[k++] = lowArray[i++];
+  }
+
+  while (j < highArray.length) {
+    tmpArr[k++] = highArray[j++];
+  }
+  //전송완료
+}
+console.log(mergeSort(arr, 0, arr.length - 1));
