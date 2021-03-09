@@ -1,0 +1,40 @@
+let graph = [
+  [Infinity, 6, 1, 5, Infinity, Infinity],
+  [6, Infinity, 5, Infinity, 3, Infinity],
+  [1, 5, Infinity, 5, 6, 4],
+  [5, Infinity, 5, Infinity, Infinity, 2],
+  [Infinity, 3, 6, Infinity, Infinity, 6],
+  [Infinity, Infinity, 4, 2, 6, Infinity],
+];
+
+let visited = [1];
+let 연결된정점 = [];
+for (let i = 0; i < graph[0].length; i++) {
+  if (graph[0][i] != Infinity) {
+    //출발정점을 알아야함.
+    연결된정점.push({ w: graph[0][i], u: 0, v: i });
+  }
+}
+
+for (let i = 0; i < graph.length; i++) {
+  //단순 횟수
+
+  연결된정점.sort(function (a, b) {
+    if (a.w < b.w) {
+      return -1;
+    } else {
+      return +1;
+    }
+  });
+  let min = 연결된정점[0];
+  visited.push(min.v + 1);
+  console.log(visited);
+  for (let i = 0; i < graph[min.v].length; i++) {
+    if (graph[min.v][i] != Infinity && !visited.includes(i + 1)) {
+      연결된정점.push({ w: graph[min.v][i], u: min.v, v: i });
+    }
+  }
+
+  console.log(`${min.u + 1}와 ${min.v + 1}가 연결됐습니다`);
+  연결된정점.splice(0, 1);
+}
