@@ -1,0 +1,46 @@
+import sys
+sys.setrecursionlimit(100000)
+input = sys.inpu
+
+def mergeSort(array, left, right):
+    if left < right:
+        mid = (left+right) // 2
+        mergeSort(array, left, mid)
+        mergeSort(array, mid+1, right)
+
+        leftArray = array[left:mid+1]
+        rightArray = array[mid+1:right+1]
+
+        k = left
+        i = 0
+        j = 0
+
+        while i < len(leftArray) and j < len(rightArray):
+            if leftArray[i] < rightArray[j]:
+                array[k] = leftArray[i]
+                i += 1
+                k += 1
+            else:
+                array[k] = rightArray[j]
+                k += 1
+                j += 1
+        while i < len(leftArray):
+            array[k] = leftArray[i]
+            i += 1
+            k += 1
+
+        while j < len(rightArray):
+            array[k] = rightArray[j]
+            j += 1
+            k += 1
+        return array
+
+
+N = int(input())
+array = []
+for i in range(0, N):
+    array.append(int(input()))
+array = mergeSort(array, 0, len(array)-1)
+
+for i in array:
+    print(i)
